@@ -3,38 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 	
-	/* This script will only contain the commands that will control the player.
-	 * these commands will not be called here, they will be called in the Input
-	 * Manger.
-	 * 
-	 * For this script we will need to use certain vectors in order to move and rotate the player
-	 * 
-	 * 
-	 * FORWARD
-	 * 
-	 * gameObject.transform.forward
-	 * An object's transform's forward literally this vector:
-	 * 
-	 * 
-	 * RIGHT
-	 * 
-	 * new Vector3 (0,0,1); 
-	 * 
-	 * gameObject.transform.right
-	 * An object's transform's right literally this vector:
-	 * 
-	 * new Vector3 (1,0,0); 
-	 * 
-	 * 
-	 * UP
-	 * 
-	 * gameObject.transform.up
-	 * An object's transform's right literally this vector:
-	 * 
-	 * new Vector3 (1,0,0); 
-	 * 
-	 */
-	
+
 	//this float will determine the player's speed;  We will ultimate multiply this by the final direction;
 	public float speed = 1;
 	
@@ -55,30 +24,16 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 	
-	/* We are making the movement function public
-	* because we want to call it from the Input Manager.
-	* 
-	* A public variable/function can be seen by other scripts
-	* A private variable/function can only be seen by itself
-	*/
+
 	
 	public void Move (float horizontalAxis, float verticalAxis) {
 		
-		/*
-		 * VECTOR MULTIPLICATION (It's simple)
-		 * 
-		 * 1 * (1,1,1) = (1,1,1);
-		 * 0 * (1,1,1) = (0,0,0);
-		 * -1 * (1,0,0) = (-1,-1,-1);
-		 * 
-		 */
+
 		
 		leftRightDirection = transform.right * horizontalAxis;
 		backFrontDirection = transform.forward * verticalAxis;
 		
-		/* The final step we need to take is to calculate the final direction of the player,
-		 * and to do this we will use the very simple property of vector addition.
-		 * 
+		/*
 		 * When you add two vectors together, you just add each of the corresponding values together.
 		 * 
 		 * VECTOR ADDITION (It's simple)
@@ -144,5 +99,20 @@ public class PlayerController : MonoBehaviour {
 		
 		// The rotation here is negative. If you do not add a negative here, your look will be inverted.
 		
+	}
+
+	//STEVEN'S SCRIPT
+	//When an object is within the player's colider box:
+	public void OnTriggerStay(Collider other)
+	{
+		if (other.gameObject.CompareTag ("Cow")) {
+			if (Input.GetKeyDown (KeyCode.E)) {
+				//other.gameObject.SetActive(false); // makes obj disapear
+				//other.transform.Rotate(90, 0, 0); // rotates it 90 degrees on the X
+				other.GetComponent<Rigidbody> ().AddForce (0, 5, 2, ForceMode.Impulse); //gets the tag for Cow and access the Rigidbody component which makes them get pushed
+				
+				Debug.Log ("moo");
+			}
+		}
 	}
 }
