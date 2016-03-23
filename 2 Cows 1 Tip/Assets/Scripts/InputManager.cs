@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputManager : MonoBehaviour {
+public class InputManager : MonoBehaviour
+{
 
 
 	//This is a reference to the playerController script
@@ -42,18 +43,22 @@ public class InputManager : MonoBehaviour {
 		mouseXAxis = Input.GetAxis ("Mouse X");
 		mouseYAxis = Input.GetAxis ("Mouse Y");
 		
-		if (mouseXAxis != 0 || mouseYAxis != 0) {
-			
-		
-		
-		playerController.MouseLook(mouseXAxis, mouseYAxis);
-
+		if (mouseXAxis != 0 || mouseYAxis != 0)
+        {
+    		playerController.MouseLook(mouseXAxis, mouseYAxis);
 		}
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            playerController.StartTippingCow();
+        }
+
 		
 		
 	}
 
-	void FixedUpdate () {
+	void FixedUpdate ()
+    {
 
 		horizontalAxis = Input.GetAxisRaw ("Horizontal"); //will return -1, 0 or 1 ---> -1 = left, 0 = no movement, 1 = right
 		verticalAxis = Input.GetAxisRaw ("Vertical"); //will return -1, 0 or 1 ---> -1 = back, 0 = no movement, 1 = forward
